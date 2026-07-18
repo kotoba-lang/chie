@@ -1,4 +1,7 @@
-{:paths ["src"]
+{:paths ["src" "test"]
+ :deps {com.etzhayyim/kotoba-datom
+        {:git/url "https://github.com/etzhayyim/com-etzhayyim-kotoba-datom.git"
+         :git/sha "3c4b3b92234e59ba285119fd8b2ca4c2ee172ff8"}}
  :aliases
  {:test {:extra-paths ["test"]
          :extra-deps {io.github.cognitect-labs/test-runner

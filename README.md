@@ -1,5 +1,9 @@
 # chie 智慧 — AI-ecosystem Knowledge Graph mirror
 
+Standalone actor repository. EDN under `manifest.edn`, `data/`, and
+`kotoba.app.edn` is canonical; external JSON-LD is isolated under `wire/`.
+Runtime and tests live under `src/chie/` and `test/chie/`.
+
 **ADR-2606171200** · 🟢 R1+ · clj-native (`.cljc`) · kotoba/Datom-native.
 
 chie is the **AI sibling** of the power-mirror lineage (tsumugi / keizu / kabuto / kanjō /
@@ -42,7 +46,7 @@ bb test:actors                       # auto-discovers all 10 chie suites (53 tes
 
 # validated ingest into the root kotoba Datom log
 bb kotoba:ingest 00-contracts/schemas/ai-ecosystem-ontology.kotoba.edn \
-                 20-actors/chie/data/seed-ai-ecosystem.kotoba.edn --validate
+                 data/seed.edn --validate
 bb kotoba:roster-report | grep chie  # chie on the roster — 0 undeclared / 0 violations
 ```
 
@@ -50,12 +54,12 @@ bb kotoba:roster-report | grep chie  # chie on the roster — 0 undeclared / 0 v
 
 | Path | Role |
 |---|---|
-| `manifest.edn` / `manifest.jsonld` | actor manifest (edn-native + JSON-LD) |
-| `kotoba/schema.edn` | rich ontology (axes / forbidden set / bridge) |
+| `manifest.edn` / `wire/manifest.jsonld` | actor manifest (edn-native + JSON-LD) |
+| `data/schema/ontology.edn` | rich ontology (axes / forbidden set / bridge) |
 | `00-contracts/schemas/ai-ecosystem-ontology.kotoba.edn` | db/ident vocab (root kotoba ingest) |
-| `data/seed-ai-ecosystem.kotoba.edn` | 53-node representative seed (all kinds/edges/axes) |
+| `data/seed.edn` | 53-node representative seed (all kinds/edges/axes) |
 | `data/ingest/*.fixture.edn` | DISCLOSED-source fixtures (rounds + policy, official URLs) |
-| `methods/*.cljc` | analyze · datom_emit · coverage_report · autorun · digest · ingest · query · verify |
+| `src/chie/methods/*.cljc` | analyze · datom_emit · coverage_report · autorun · digest · ingest · query · verify |
 | `cell.cljc` | cell-runner entry (`ChieHeartbeatCell`, node gad, cron `37 * * * *`) |
 | `CLAUDE.md` / `MATURITY.md` | gates + scorecard |
 

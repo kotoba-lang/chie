@@ -33,23 +33,23 @@
   {:ng/id "N4" :ng/req "does not duplicate sibling data — references kanjō/kabuto/handotai/kasa/kenkyusha/keizu/kosatsu/abaki"}]
 
  :actor/methods
- [{:method/id "analyze"          :method/file "methods/analyze.cljc"          :method/runtime :clj}
-  {:method/id "datom-emit"       :method/file "methods/datom_emit.cljc"       :method/runtime :clj}
-  {:method/id "coverage-report"  :method/file "methods/coverage_report.cljc"  :method/runtime :clj}
-  {:method/id "autorun"          :method/file "methods/autorun.cljc"          :method/runtime :clj}
-  {:method/id "digest"           :method/file "methods/digest.cljc"           :method/runtime :clj}
-  {:method/id "ingest"           :method/file "methods/ingest.cljc"           :method/runtime :clj}
-  {:method/id "query"            :method/file "methods/query.cljc"            :method/runtime :clj}
-  {:method/id "verify"           :method/file "methods/verify.cljc"           :method/runtime :clj}
-  {:method/id "kqe"              :method/file "methods/kqe.cljc"              :method/runtime :clj}]
+ [{:method/id "analyze"          :method/file "src/chie/methods/analyze.cljc"          :method/runtime :clj}
+  {:method/id "datom-emit"       :method/file "src/chie/methods/datom_emit.cljc"       :method/runtime :clj}
+  {:method/id "coverage-report"  :method/file "src/chie/methods/coverage_report.cljc"  :method/runtime :clj}
+  {:method/id "autorun"          :method/file "src/chie/methods/autorun.cljc"          :method/runtime :clj}
+  {:method/id "digest"           :method/file "src/chie/methods/digest.cljc"           :method/runtime :clj}
+  {:method/id "ingest"           :method/file "src/chie/methods/ingest.cljc"           :method/runtime :clj}
+  {:method/id "query"            :method/file "src/chie/methods/query.cljc"            :method/runtime :clj}
+  {:method/id "verify"           :method/file "src/chie/methods/verify.cljc"           :method/runtime :clj}
+  {:method/id "kqe"              :method/file "src/chie/methods/kqe.cljc"              :method/runtime :clj}]
 
  :actor/cells
  [{:cell/id "ChieHeartbeatCell" :cell/entry "chie.cell/fire" :cell/runtime :clj :cell/node "gad"
    :cell/trigger {:kind :cron :expr "37 * * * *"} :cell/healthz 13082}]
 
- :actor/schema   "kotoba/schema.edn"
+ :actor/schema   "data/schema/ontology.edn"
  :actor/vocabulary "ai-ecosystem-ontology"      ;; 00-contracts/schemas/ai-ecosystem-ontology.kotoba.edn
- :actor/seed     "data/seed-ai-ecosystem.kotoba.edn"
+ :actor/seed     "data/seed.edn"
 
  :actor/bridge
  {:financials :kanjo :supply :kabuto :silicon :handotai :compute-cap :kasa

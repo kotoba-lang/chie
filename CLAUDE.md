@@ -51,20 +51,20 @@ kenkyusha research frontiers, and `*-compat` API facades).
 ## Layout
 
 ```
-20-actors/chie/
+./
 ├── CLAUDE.md                              # this file
-├── manifest.jsonld                        # actor manifest
+├── wire/manifest.jsonld                        # actor manifest
 ├── MATURITY.md                            # maturity scorecard + roadmap
 ├── kotoba/
 │   └── schema.edn                         # AI-ecosystem ontology (nodes / 縁 / axes / forbidden)
 ├── data/
-│   └── seed-ai-ecosystem.kotoba.edn       # real PUBLIC AI-ecosystem graph (representative)
-├── methods/                               # clj-native (.cljc), kotoba pywasm-target IS the source
+│   └── seed.edn       # real PUBLIC AI-ecosystem graph (representative)
+├── src/chie/methods/                               # clj-native (.cljc), kotoba pywasm-target IS the source
 │   ├── analyze.cljc                       # edge-primary 取-concentration → OPENING
 │   ├── datom_emit.cljc                    # kotoba Datom-log (EAVT) emitter — canonical state
 │   ├── coverage_report.cljc               # honest coverage + gap map (G5)
 │   └── test_datom_emit.cljc
-├── tests/
+├── test/
 │   ├── test_analyze.cljc
 │   └── test_coverage.cljc
 └── out/                                    # GENERATED — do not hand-edit / not committed
@@ -80,7 +80,7 @@ bb test:actors           # auto-discovers chie.tests.* + chie.methods.test-* (18
 The three test namespaces are picked up automatically by `etzhayyim.tools.discovery`
 (ADR-2606131500) — no bb.edn churn.
 
-## Ontology (`kotoba/schema.edn`)
+## Ontology (`data/schema/ontology.edn`)
 
 - **nodes** `:organism/kind` ∈ the 11 `:ai.*` kinds; facets `:ai/sector`, `:ai/open?`.
 - **edges** `:en/kind` ∈ `{:invests-in :compute-deal :talent-flow :governs :sets-standard

@@ -1,0 +1,3 @@
+{:tasks
+ {test {:task (shell "clojure -M -m chie.test-runner")}
+  audit {:task (shell "bb scripts/audit.clj")}}}
