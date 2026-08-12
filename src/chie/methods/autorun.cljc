@@ -60,10 +60,20 @@
       base)))
 
 #?(:clj
+   (def ^:private source-root
+     "Repo root, derived from *file* at LOAD time — nil when it cannot be derived.
+
+     Under `clojure -M -m` the namespace is loaded from the classpath, so *file* is the
+     bare relative path `chie/methods/autorun.cljc`: the parents run out before reaching a
+     root. This is a convenience default for in-repo REPL use only; the CLI takes both the
+     seed and the log path from argv so the caller never depends on how this resolves."
+     (some-> *file* clojure.java.io/file
+             .getParentFile .getParentFile .getParentFile .getParentFile)))
+
+#?(:clj
    (def log-default
-     "./data/chie.datoms.kotoba.edn (resolved at the host edge)."
-     (-> *file* clojure.java.io/file .getParentFile .getParentFile
-         (clojure.java.io/file "data" "chie.datoms.kotoba.edn"))))
+     "<repo>/data/chie.datoms.kotoba.edn, or nil when source-root is not derivable."
+     (some-> source-root (clojure.java.io/file "data" "chie.datoms.kotoba.edn"))))
 
 #?(:clj
    (defn run-cycle
@@ -93,17 +103,38 @@
 
 #?(:clj
    (defn -main
-     "CLI: run N heartbeat cycles against the local log (default 1)."
+     "CLI: chie.methods.autorun [seed-path [log-path]] [--cycles N]
+
+     Both paths are POSITIONAL and should be passed explicitly. They used to be derived
+     from *file*, which NPE'd under `clojure -M -m` (see source-root) — the reason this
+     actor never ran. Falling back to source-root keeps in-repo REPL use working, but a
+     caller that passes the paths never depends on how *file* happens to resolve."
      [& argv]
      (let [argv (vec argv)
-           here (-> *file* clojure.java.io/file .getParentFile .getParentFile .getParentFile .getParentFile)
-           seed (clojure.java.io/file here "data" "seed.edn")
-           cycles (if (some #{"--cycles"} argv)
-                    (Long/parseLong (nth argv (inc (.indexOf argv "--cycles"))))
-                    1)]
-       (dotimes [_ cycles]
-         (let [s (run-cycle seed log-default)]
-           (println (str "chie heartbeat cycle " (:cycle s) " → cid " (:cid s)
-                         " (" (:datoms s) " datoms, chain " (:chain-length s) ", top-opening "
-                         (first (:top-opening s)) " " (format "%.3f" (second (:top-opening s))) ")"))))
-       0)))
+           ci (.indexOf argv "--cycles")
+           cycles (if (neg? ci) 1 (Long/parseLong (nth argv (inc ci))))
+           consumed (if (neg? ci) #{} #{ci (inc ci)})
+           positional (vec (keep-indexed (fn [i a] (when-not (consumed i) a)) argv))
+           seed (or (some-> (get positional 0) clojure.java.io/file)
+                    (some-> source-root (clojure.java.io/file "data" "seed.edn")))
+           log (or (some-> (get positional 1) clojure.java.io/file) log-default)
+           ;; System/exit, not a return value: `clojure -M -m` discards what -main returns,
+           ;; so a bare `2` would let a failed run report exit 0 to the observatory runner.
+           fail (fn [msg]
+                  (binding [*out* *err*] (println (str "chie: " msg)))
+                  (flush)
+                  (System/exit 2))]
+       (cond
+         (nil? seed) (fail "seed path could not be derived — pass it: -m chie.methods.autorun <seed> <log>")
+         (nil? log) (fail "log path could not be derived — pass it: -m chie.methods.autorun <seed> <log>")
+         (not (.exists seed)) (fail (str "seed not found: " seed))
+         :else
+         (do
+           (some-> (.getParentFile log) .mkdirs)
+           (dotimes [_ cycles]
+             (let [s (run-cycle seed log)
+                   [top-id top-load] (:top-opening s)]
+               (println (str "chie heartbeat cycle " (:cycle s) " → cid " (:cid s)
+                             " (" (:datoms s) " datoms, chain " (:chain-length s) ", top-opening "
+                             top-id " " (if top-load (format "%.3f" top-load) "n/a") ")"))))
+           0)))))
