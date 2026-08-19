@@ -1,4 +1,4 @@
-(ns chie.tests.test-schema
+(ns chie.core.test-schema
   "chie 智慧 — schema-conformance / drift guard (ADR-2606171200). Locks the actor to the
   root kotoba roster (etzhayyim.kotoba.ingest): every attribute used by the seed MUST be
   declared in 00-contracts/schemas/ai-ecosystem-ontology.kotoba.edn, and the seed must name

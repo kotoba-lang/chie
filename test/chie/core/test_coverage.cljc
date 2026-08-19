@@ -1,4 +1,4 @@
-(ns chie.tests.test-coverage
+(ns chie.core.test-coverage
   "chie 智慧 — coverage report tests (ADR-2606171200). Verifies sourcing honesty (G5):
     - the seed counts nodes/edges by kind and sector
     - the :authoritative/:representative split is reported (seed is all representative)

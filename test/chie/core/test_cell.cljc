@@ -1,4 +1,4 @@
-(ns chie.tests.test-cell
+(ns chie.core.test-cell
   "chie 智慧 — cell-runner contract tests (ADR-2606171200 / ADR-2605192415 §7.1). Verifies:
     - `fire` runs ONE heartbeat against an explicit log and returns an aggregate-only summary
     - the summary carries cycle / cid / chain-length / top-opening (no DID, no per-entity score)

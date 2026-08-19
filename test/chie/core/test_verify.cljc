@@ -1,4 +1,4 @@
-(ns chie.tests.test-verify
+(ns chie.core.test-verify
   "chie 智慧 — integrity / charter-gate tests (ADR-2606171200). The committed seed passes
   the full self-audit clean; each adversarial mutation is caught:
     - G4 forbidden token on a node/edge → error
