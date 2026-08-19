@@ -9,6 +9,18 @@
  {:test {:extra-paths ["test"]
          :extra-deps {io.github.cognitect-labs/test-runner
                       {:git/tag "v0.5.1" :git/sha "dfb30dd"}}
-         :main-opts ["-m" "cognitect.test-runner"]}
+         ;; Two regexes, because this tree names test namespaces two ways.
+         ;; cognitect's default is `.*-test$`, which matched 2 of 15 files --
+         ;; measured 2026-08-19: `clojure -M:test` ran 11 tests where the tree
+         ;; holds 76. The other 13 use a `test-` PREFIX (chie.methods.test-*,
+         ;; chie.core.test-*) and were skipped in silence.
+         ;;
+         ;; Five of those could not be loaded by `require` at all: their ns
+         ;; said `chie.tests.*` while they lived in `test/chie/core/`, so only
+         ;; the repo's own load-file runner could reach them and nothing else
+         ;; -- not a REPL, not an editor. Those ns forms are corrected to match
+         ;; their paths in the same change.
+         :main-opts ["-m" "cognitect.test-runner"
+                     "-r" ".*-test$" "-r" "chie\\..*\\.test-.*"]}
   :lint {:replace-deps {clj-kondo/clj-kondo {:mvn/version "2024.11.14"}}
          :main-opts    ["-m" "clj-kondo.main" "--lint" "src" "test" "--fail-level" "error"]}}}

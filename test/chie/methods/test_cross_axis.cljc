@@ -1,6 +1,8 @@
-#!/usr/bin/env bb
 ;; chie 智慧 — tests for the cross-axis query lenses (talent / axis-profile / multi-axis chokepoints).
-;; Run as part of the standalone `bb test` suite.
+;; Run by `clojure -M:test`. The `#!/usr/bin/env bb` shebang that used to head
+;; this file made it invisible to BOTH runners -- the ns form was not the first
+;; form, so file-ns read the shebang and require could not load it at all. bb
+;; was retired by ADR-2607173000; the shebang outlived it by five tests.
 (ns chie.methods.test-cross-axis
   "Tests for the cross-axis query lenses added to query.cljc:
     - talent-sources-of    — the 4th per-axis source lens (completes capital/compute/policy)

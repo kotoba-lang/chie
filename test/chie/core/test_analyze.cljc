@@ -1,4 +1,4 @@
-(ns chie.tests.test-analyze
+(ns chie.core.test-analyze
   "chie 智慧 — analyzer tests (ADR-2606171200). Verifies the constitutional invariants
   empirically:
     - the seed parses + classifies into nodes + 縁
