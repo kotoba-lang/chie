@@ -6,7 +6,8 @@
 ;; used by 80-data/*/​*-datoms.kotoba.edn so downstream tools read one format.
 
 (ns etzhayyim.kotoba.log
-  (:require [clojure.edn :as edn]
+  (:require [kotoba.lang.edn :as kedn]
+            [clojure.edn :as edn]
             [clojure.java.io :as io]
             [clojure.string :as str]
             [etzhayyim.kotoba.datom :as d]
@@ -35,7 +36,17 @@
   (ensure-journal! path)
   (with-open [w (io/writer path :append true)]
     (doseq [dm datoms]
-      (.write w (pr-str (vec dm)))
+      ;; Escaped, because a journal exists to be read. `pr-str` emits raw
+      ;; control bytes, and one of them makes file(1) call this log `data`
+      ;; and grep skip it silently -- `grep -c :some/attr <journal>` would
+      ;; print nothing and exit 1, exactly what a journal not containing that
+      ;; attribute does.
+      ;;
+      ;; This cannot move `head-cid`. The CID is taken over the PARSED log,
+      ;; not over the file bytes, and `\u0000` reads back as the same
+      ;; character -- measured 2026-08-19, same CID before and after on a
+      ;; datom carrying a NUL.
+      (.write w (kedn/escape-controls (pr-str (vec dm))))
       (.write w "\n")))
   (count datoms))
 
