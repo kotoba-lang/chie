@@ -13,7 +13,7 @@
 
   CONSTITUTIONAL: read-only; no narration, no verdict; G4 forbidden attrs are unrepresentable
   in the schema so they cannot appear in any query result."
-  (:require [clojure.edn :as edn]
+  (:require [kotoba.lang.text] [clojure.edn :as edn]
             #?(:clj [clojure.java.io :as io])
             #?(:clj [etzhayyim.kotoba.engine :as kt])))
 
@@ -26,7 +26,7 @@
     (cond
       (:organism/id m) (assoc m :db/id (:organism/id m))
       :else (assoc m :db/id (str "en." (:en/from m) "."
-                                 (let [k (str (:en/kind m))] (if (clojure.string/starts-with? k ":") (subs k 1) k))
+                                 (let [k (str (:en/kind m))] (if (kotoba.lang.text/starts-with? k ":") (subs k 1) k))
                                  "." (:en/to m))))))
 
 #?(:clj

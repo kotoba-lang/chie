@@ -16,7 +16,7 @@
 ;;   (kt/head-cid conn)   ; content-address of the journal head
 
 (ns etzhayyim.kotoba.engine
-  (:require [clojure.string :as str]
+  (:require [kotoba.lang.text :as str]
             [etzhayyim.kotoba.datom :as d]
             [etzhayyim.kotoba.log :as log]
             [etzhayyim.kotoba.query :as query]

@@ -11,7 +11,7 @@
 
   The digest is NARRATION, never a verdict: it describes the aggregate opening readout
   (who most needs OPENING, by axis) — it does NOT grade capability or forecast (G1/G4)."
-  (:require [clojure.string :as str]
+  (:require [kotoba.lang.text :as str]
             [chie.methods.analyze :as analyze]))
 
 ;; ADR-2605215000: the Murakumo fleet endpoints — NOTHING else is representable.
@@ -32,7 +32,7 @@
 
 (defn- host-of [endpoint]
   (when-let [[_ netloc] (re-find #"^[A-Za-z][A-Za-z0-9+.\-]*://([^/?#]*)" (str endpoint))]
-    (str/lower-case netloc)))
+    (str/lower netloc)))
 
 (defn assert-murakumo
   "Refuse any endpoint whose host:port is not in the Murakumo fleet allowlist."

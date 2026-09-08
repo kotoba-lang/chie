@@ -9,7 +9,7 @@
   (:require [kotoba.lang.edn :as kedn]
             [clojure.edn :as edn]
             [clojure.java.io :as io]
-            [clojure.string :as str]
+            [kotoba.lang.text :as str]
             [etzhayyim.kotoba.datom :as d]
             [etzhayyim.kotoba.cid :as cid]))
 

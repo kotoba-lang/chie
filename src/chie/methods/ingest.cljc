@@ -15,7 +15,7 @@
   is idempotent: re-ingesting the same fixture is a no-op (id-keyed merge / upgrade-only).
 
   Pure fns; file I/O only at the #?(:clj) edge; deterministic."
-  (:require [clojure.string :as str]
+  (:require [kotoba.lang.text :as str]
             [chie.methods.analyze :as analyze]
             #?(:clj [clojure.java.io :as io])))
 

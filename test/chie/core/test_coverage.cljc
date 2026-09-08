@@ -5,7 +5,7 @@
     - absent node/edge kinds are surfaced as a gap worklist (no fabricated coverage)
     - the report states coverage is ~0 by design"
   (:require [clojure.test :refer [deftest is testing run-tests]]
-            [clojure.string :as str]
+            [kotoba.lang.text :as str]
             #?(:clj [clojure.java.io :as io])
             [chie.methods.analyze :as analyze]
             [chie.methods.coverage-report :as cov]))

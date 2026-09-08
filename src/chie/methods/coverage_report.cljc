@@ -12,7 +12,7 @@
     - a worklist of structural gaps (kinds/axes thin or absent) routed to next ingest.
 
   Pure fns; reuses chie.methods.analyze. Portable .cljc."
-  (:require [clojure.string :as str]
+  (:require [kotoba.lang.text :as str]
             [chie.methods.analyze :as analyze]
             #?(:clj [clojure.java.io :as io])))
 

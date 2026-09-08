@@ -23,7 +23,7 @@
   House style mirrors the mirror-lineage cljc ports: Python-style ':…' keyword strings stay
   strings; pure fns; deterministic ordering by (-value, id); file I/O only at edges. Portable
   .cljc (clj-native — no Python twin; kotoba pywasm target is the Clojure source itself)."
-  (:require [clojure.string :as str]
+  (:require [kotoba.lang.text :as str]
             #?(:clj [clojure.java.io :as io])))
 
 ;; ── minimal EDN reader (subset: vectors [], maps {}, :keyword, "string", num, bool, nil) ──

@@ -16,7 +16,7 @@
             attr (:person/* / :ai/email / :ai/affiliation-private) is present.
     G5      sourcing ∈ {:representative :authoritative} on every node + edge.
     DRIFT   every attribute used is declared in the 00-contracts schema."
-  (:require [clojure.string :as str]
+  (:require [kotoba.lang.text :as str]
             [clojure.set :as set]
             [chie.methods.analyze :as analyze]
             #?(:clj [clojure.java.io :as io])))
@@ -62,7 +62,7 @@
        (when (forbidden-hit? n) (err! (str "G4: node " nid " carries a forbidden token")))
        ;; G2: persons are public ROLE nodes only
        (when (= ":ai.role/person" (get n ":organism/kind"))
-         (when-not (str/includes? (str/lower-case (str (get n ":organism/label"))) "role")
+         (when-not (str/includes? (str/lower (str (get n ":organism/label"))) "role")
            (err! (str "G2: person node " nid " is not labelled a public role"))))
        (doseq [pk [":person/name" ":ai/email" ":ai/affiliation-private" ":person/private"]]
          (when (contains? n pk) (err! (str "G2: node " nid " carries private-profile attr " pk)))))

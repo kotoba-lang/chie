@@ -13,7 +13,7 @@
 ;; arrangement-join path.
 
 (ns etzhayyim.kotoba.query
-  (:require [clojure.string :as str]
+  (:require [kotoba.lang.text :as str]
             [etzhayyim.kotoba.datom :as d]))
 
 (defn- lvar? [x] (and (symbol? x) (str/starts-with? (name x) "?")))
