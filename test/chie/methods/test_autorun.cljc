@@ -6,7 +6,7 @@
     - GROUND node + edge datoms are present; coverage tx is aggregate-only (counts, no per-node integral)
     - G4: the persisted log contains no :trade / :forecast / :ai/score token"
   (:require [clojure.test :refer [deftest is testing run-tests]]
-            [clojure.string :as str]
+            [kotoba.lang.text :as str]
             #?(:clj [clojure.java.io :as io])
             [kotoba.datom :as kd]
             [chie.methods.analyze :as analyze]

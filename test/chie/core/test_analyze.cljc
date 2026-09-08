@@ -12,7 +12,7 @@
     - rank is deterministic (tie-break by id) and drops non-positive values
     - the rendered report carries the G1/G4 framing (never a target-list / never-trades)"
   (:require [clojure.test :refer [deftest is testing run-tests]]
-            [clojure.string :as str]
+            [kotoba.lang.text :as str]
             #?(:clj [clojure.java.io :as io])
             [chie.methods.analyze :as analyze]))
 

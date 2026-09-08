@@ -6,7 +6,7 @@
     - a fleet endpoint with a failing http-post falls back to the template (fail-open)
     - the digest names no per-entity score / no forecast (G1/G4)"
   (:require [clojure.test :refer [deftest is testing run-tests]]
-            [clojure.string :as str]
+            [kotoba.lang.text :as str]
             #?(:clj [clojure.java.io :as io])
             [chie.methods.analyze :as analyze]
             [chie.methods.coverage-report :as cov]

@@ -7,7 +7,7 @@
 
   G4 guard: the schema declares NO :trade / :forecast / :ai/score attribute."
   (:require [clojure.test :refer [deftest is testing run-tests]]
-            [clojure.string :as str]
+            [kotoba.lang.text :as str]
             [clojure.set :as set]
             #?(:clj [clojure.java.io :as io])
             [chie.methods.analyze :as analyze]))

@@ -15,7 +15,7 @@
       observation, never a per-entity score-of-everyone.
     - G4: the schema cannot represent :trade / :forecast / :ai/score, so the heartbeat
       cannot emit them."
-  (:require [kotoba.datom :as kd]
+  (:require [kotoba.lang.text] [kotoba.datom :as kd]
             [chie.methods.analyze :as analyze]
             [chie.methods.datom-emit :as de]
             [chie.methods.coverage-report :as cov]
@@ -33,7 +33,7 @@
         edge-ds (for [e edges
                       :let [eid (str "en." (get e ":en/from") "."
                                      (let [k (get e ":en/kind")]
-                                       (if (clojure.string/starts-with? k ":") (subs k 1) k))
+                                       (if (kotoba.lang.text/starts-with? k ":") (subs k 1) k))
                                      "." (get e ":en/to"))]
                       a de/edge-attrs
                       :let [v (get e a)]

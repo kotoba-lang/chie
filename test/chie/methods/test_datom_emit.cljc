@@ -6,7 +6,7 @@
     - :ai/open? booleans render as true/false literals; :…/… keywords stay literal
     - the emit is deterministic (same input → byte-identical output)"
   (:require [clojure.test :refer [deftest is testing run-tests]]
-            [clojure.string :as str]
+            [kotoba.lang.text :as str]
             #?(:clj [clojure.java.io :as io])
             [chie.methods.analyze :as analyze]
             [chie.methods.datom-emit :as de]))

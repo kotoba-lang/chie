@@ -7,7 +7,7 @@
     - grasping-load outside [0,1] → error
     - a person node with a private-profile attr → error (G2)
     - undeclared attr vs the schema → DRIFT error"
-  (:require [clojure.test :refer [deftest is testing run-tests]]
+  (:require [kotoba.lang.text] [clojure.test :refer [deftest is testing run-tests]]
             #?(:clj [clojure.java.io :as io])
             [chie.methods.analyze :as analyze]
             [chie.methods.verify :as v]))
@@ -33,7 +33,7 @@
            bad (assoc-in nodes ["ai.lab.openai" ":ai/score"] 9)
            r (v/verify bad edges)]
        (is (not (:ok r)))
-       (is (some #(clojure.string/includes? % "G4") (:errors r))))))
+       (is (some #(kotoba.lang.text/includes? % "G4") (:errors r))))))
 
 #?(:clj
    (deftest test-bad-sourcing-caught
@@ -49,7 +49,7 @@
                             ":en/grasping-load" 0.5 ":en/sourcing" ":representative"})
            r (v/verify nodes bad)]
        (is (not (:ok r)))
-       (is (some #(clojure.string/includes? % "unknown node ghost") (:errors r))))))
+       (is (some #(kotoba.lang.text/includes? % "unknown node ghost") (:errors r))))))
 
 #?(:clj
    (deftest test-load-out-of-range-caught
@@ -67,7 +67,7 @@
        ;; reuse the same graph but inject into nodes
        (let [r2 (v/verify bad edges)]
          (is (not (:ok r2)))
-         (is (some #(clojure.string/includes? % "G2") (:errors r2)))))))
+         (is (some #(kotoba.lang.text/includes? % "G2") (:errors r2)))))))
 
 #?(:clj
    (deftest test-drift-caught
@@ -76,7 +76,7 @@
            declared #{":organism/id" ":organism/kind" ":organism/sourcing" ":ai/open?"}
            r (v/verify bad edges declared)]
        (is (not (:ok r)))
-       (is (some #(clojure.string/includes? % "DRIFT") (:errors r))))))
+       (is (some #(kotoba.lang.text/includes? % "DRIFT") (:errors r))))))
 
 #?(:clj
    (defn -main [& _]

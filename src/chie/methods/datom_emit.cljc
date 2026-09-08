@@ -12,7 +12,7 @@
       transient block so a reader can materialise them without mistaking them for persisted state.
 
   Reuses chie.methods.analyze. Node walk order = first-touch EDN read order (deterministic)."
-  (:require [clojure.string :as str]
+  (:require [kotoba.lang.text :as str]
             [chie.methods.analyze :as analyze]
             #?(:clj [clojure.java.io :as io])))
 
