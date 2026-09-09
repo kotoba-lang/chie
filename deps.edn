@@ -13,7 +13,7 @@
  :aliases
  {:test {:extra-paths ["test"]
          :extra-deps {io.github.cognitect-labs/test-runner
-                      {:git/tag "v0.5.1" :git/sha "dfb30dd"}}
+                      {:git/tag "v0.5.1" :git/sha "dfb30dd6605cb6c0efc275e1df1736f6e90d4d73"}}
          ;; Two regexes, because this tree names test namespaces two ways.
          ;; cognitect's default is `.*-test$`, which matched 2 of 15 files --
          ;; measured 2026-08-19: `clojure -M:test` ran 11 tests where the tree
