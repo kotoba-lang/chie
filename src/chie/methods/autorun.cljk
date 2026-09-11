@@ -63,7 +63,7 @@
    (def ^:private source-root
      "Repo root, derived from *file* at LOAD time — nil when it cannot be derived.
 
-     Under `clojure -M -m` the namespace is loaded from the classpath, so *file* is the
+     Under `kbb -M -m` the namespace is loaded from the classpath, so *file* is the
      bare relative path `chie/methods/autorun.cljc`: the parents run out before reaching a
      root. This is a convenience default for in-repo REPL use only; the CLI takes both the
      seed and the log path from argv so the caller never depends on how this resolves."
@@ -106,7 +106,7 @@
      "CLI: chie.methods.autorun [seed-path [log-path]] [--cycles N]
 
      Both paths are POSITIONAL and should be passed explicitly. They used to be derived
-     from *file*, which NPE'd under `clojure -M -m` (see source-root) — the reason this
+     from *file*, which NPE'd under `kbb -M -m` (see source-root) — the reason this
      actor never ran. Falling back to source-root keeps in-repo REPL use working, but a
      caller that passes the paths never depends on how *file* happens to resolve."
      [& argv]
@@ -118,7 +118,7 @@
            seed (or (some-> (get positional 0) clojure.java.io/file)
                     (some-> source-root (clojure.java.io/file "data" "seed.edn")))
            log (or (some-> (get positional 1) clojure.java.io/file) log-default)
-           ;; System/exit, not a return value: `clojure -M -m` discards what -main returns,
+           ;; System/exit, not a return value: `kbb -M -m` discards what -main returns,
            ;; so a bare `2` would let a failed run report exit 0 to the observatory runner.
            fail (fn [msg]
                   (binding [*out* *err*] (println (str "chie: " msg)))

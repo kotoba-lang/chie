@@ -42,12 +42,12 @@ seed (kotoba EDN) → analyze (4-axis 取-concentration, on-read) → OPENING pr
 
 ```bash
 # from repo root (bb.edn classpath roots 20-actors)
-bb test:actors                       # auto-discovers all 10 chie suites (53 tests / 165 assertions)
+kbb -M:test:actors                       # auto-discovers all 10 chie suites (53 tests / 165 assertions)
 
 # validated ingest into the root kotoba Datom log
-bb kotoba:ingest 00-contracts/schemas/ai-ecosystem-ontology.kotoba.edn \
+kbb -M:kotoba:ingest 00-contracts/schemas/ai-ecosystem-ontology.kotoba.edn \
                  data/seed.edn --validate
-bb kotoba:roster-report | grep chie  # chie on the roster — 0 undeclared / 0 violations
+kbb -M:kotoba:roster-report | grep chie  # chie on the roster — 0 undeclared / 0 violations
 ```
 
 ## Files
