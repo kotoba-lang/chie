@@ -33,15 +33,15 @@
   {:ng/id "N4" :ng/req "does not duplicate sibling data — references kanjō/kabuto/handotai/kasa/kenkyusha/keizu/kosatsu/abaki"}]
 
  :actor/methods
- [{:method/id "analyze"          :method/file "src/chie/methods/analyze.cljc"          :method/runtime :clj}
-  {:method/id "datom-emit"       :method/file "src/chie/methods/datom_emit.cljc"       :method/runtime :clj}
-  {:method/id "coverage-report"  :method/file "src/chie/methods/coverage_report.cljc"  :method/runtime :clj}
-  {:method/id "autorun"          :method/file "src/chie/methods/autorun.cljc"          :method/runtime :clj}
-  {:method/id "digest"           :method/file "src/chie/methods/digest.cljc"           :method/runtime :clj}
-  {:method/id "ingest"           :method/file "src/chie/methods/ingest.cljc"           :method/runtime :clj}
-  {:method/id "query"            :method/file "src/chie/methods/query.cljc"            :method/runtime :clj}
-  {:method/id "verify"           :method/file "src/chie/methods/verify.cljc"           :method/runtime :clj}
-  {:method/id "kqe"              :method/file "src/chie/methods/kqe.cljc"              :method/runtime :clj}]
+ [{:method/id "analyze"          :method/file "src/chie/methods/analyze.cljk"          :method/runtime :clj}
+  {:method/id "datom-emit"       :method/file "src/chie/methods/datom_emit.cljk"       :method/runtime :clj}
+  {:method/id "coverage-report"  :method/file "src/chie/methods/coverage_report.cljk"  :method/runtime :clj}
+  {:method/id "autorun"          :method/file "src/chie/methods/autorun.cljk"          :method/runtime :clj}
+  {:method/id "digest"           :method/file "src/chie/methods/digest.cljk"           :method/runtime :clj}
+  {:method/id "ingest"           :method/file "src/chie/methods/ingest.cljk"           :method/runtime :clj}
+  {:method/id "query"            :method/file "src/chie/methods/query.cljk"            :method/runtime :clj}
+  {:method/id "verify"           :method/file "src/chie/methods/verify.cljk"           :method/runtime :clj}
+  {:method/id "kqe"              :method/file "src/chie/methods/kqe.cljk"              :method/runtime :clj}]
 
  :actor/cells
  [{:cell/id "ChieHeartbeatCell" :cell/entry "chie.cell/fire" :cell/runtime :clj :cell/node "gad"
