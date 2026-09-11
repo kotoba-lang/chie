@@ -74,7 +74,7 @@ kenkyusha research frontiers, and `*-compat` API facades).
 
 ```bash
 # from repo root (bb.edn classpath roots 20-actors)
-bb test:actors           # auto-discovers chie.tests.* + chie.methods.test-* (18 assertions-suite)
+kbb -M:test:actors           # auto-discovers chie.tests.* + chie.methods.test-* (18 assertions-suite)
 ```
 
 The three test namespaces are picked up automatically by `etzhayyim.tools.discovery`
