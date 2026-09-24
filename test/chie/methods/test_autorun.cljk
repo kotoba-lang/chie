@@ -5,7 +5,7 @@
     - tamper-evidence: mutating an earlier tx breaks every later CID (verify-chain :broken-at)
     - GROUND node + edge datoms are present; coverage tx is aggregate-only (counts, no per-node integral)
     - G4: the persisted log contains no :trade / :forecast / :ai/score token"
-  (:require [clojure.test :refer [deftest is testing run-tests]]
+  (:require [kotoba.test :refer [deftest is testing run-tests]]
             [kotoba.lang.text :as str]
             #?(:clj [clojure.java.io :as io])
             [kotoba.datom :as kd]

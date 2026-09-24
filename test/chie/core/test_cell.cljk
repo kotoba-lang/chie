@@ -3,7 +3,7 @@
     - `fire` runs ONE heartbeat against an explicit log and returns an aggregate-only summary
     - the summary carries cycle / cid / chain-length / top-opening (no DID, no per-entity score)
     - a second `fire` advances the cycle (resume-safe; cell is idempotent per log state)"
-  (:require [clojure.test :refer [deftest is testing run-tests]]
+  (:require [kotoba.test :refer [deftest is testing run-tests]]
             #?(:clj [clojure.java.io :as io])
             [chie.cell :as cell]))
 

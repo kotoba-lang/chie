@@ -5,7 +5,7 @@
     - funders-of-lab via Datalog == query/funders-of via in-memory traversal
     - pull (VAET reverse-ref :en/_to) returns a node's inbound 縁
   CLJ-only (the engine + journal are JVM/bb host concerns)."
-  (:require [clojure.test :refer [deftest is testing run-tests]]
+  (:require [kotoba.test :refer [deftest is testing run-tests]]
             #?(:clj [clojure.java.io :as io])
             [chie.methods.analyze :as analyze]
             [chie.methods.query :as q]

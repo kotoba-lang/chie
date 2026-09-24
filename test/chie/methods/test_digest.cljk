@@ -5,7 +5,7 @@
     - Murakumo-only: a non-fleet endpoint throws murakumo-only-violation? BEFORE any call
     - a fleet endpoint with a failing http-post falls back to the template (fail-open)
     - the digest names no per-entity score / no forecast (G1/G4)"
-  (:require [clojure.test :refer [deftest is testing run-tests]]
+  (:require [kotoba.test :refer [deftest is testing run-tests]]
             [kotoba.lang.text :as str]
             #?(:clj [clojure.java.io :as io])
             [chie.methods.analyze :as analyze]

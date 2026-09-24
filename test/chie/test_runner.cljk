@@ -1,6 +1,6 @@
 (ns chie.test-runner
   (:require [clojure.java.io :as io]
-            [clojure.test :as test]))
+            [kotoba.test :as test]))
 
 (defn- file-ns [file]
   (with-open [r (java.io.PushbackReader. (io/reader file))]
