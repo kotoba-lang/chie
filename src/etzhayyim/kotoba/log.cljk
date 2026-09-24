@@ -7,7 +7,7 @@
 
 (ns etzhayyim.kotoba.log
   (:require [kotoba.lang.edn :as kedn]
-            [clojure.edn :as edn]
+            [kotoba.lang.edn :as edn]
             [clojure.java.io :as io]
             [kotoba.lang.text :as str]
             [etzhayyim.kotoba.datom :as d]
