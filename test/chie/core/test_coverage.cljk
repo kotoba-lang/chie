@@ -6,7 +6,7 @@
     - the report states coverage is ~0 by design"
   (:require [kotoba.test :refer [deftest is testing run-tests]]
             [kotoba.lang.text :as str]
-            #?(:clj [clojure.java.io :as io])
+            #?(:clj [kotoba.io :as io])
             [chie.methods.analyze :as analyze]
             [chie.methods.coverage-report :as cov]))
 

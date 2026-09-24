@@ -8,8 +8,8 @@
   G4 guard: the schema declares NO :trade / :forecast / :ai/score attribute."
   (:require [kotoba.test :refer [deftest is testing run-tests]]
             [kotoba.lang.text :as str]
-            [clojure.set :as set]
-            #?(:clj [clojure.java.io :as io])
+            [kotoba.lang.coll :as set]
+            #?(:clj [kotoba.io :as io])
             [chie.methods.analyze :as analyze]))
 
 #?(:clj (def actor-dir (io/file ".")))

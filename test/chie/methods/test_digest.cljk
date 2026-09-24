@@ -7,7 +7,7 @@
     - the digest names no per-entity score / no forecast (G1/G4)"
   (:require [kotoba.test :refer [deftest is testing run-tests]]
             [kotoba.lang.text :as str]
-            #?(:clj [clojure.java.io :as io])
+            #?(:clj [kotoba.io :as io])
             [chie.methods.analyze :as analyze]
             [chie.methods.coverage-report :as cov]
             [chie.methods.digest :as digest]))

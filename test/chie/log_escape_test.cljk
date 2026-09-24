@@ -6,7 +6,7 @@
   `grep -c :some/attr <journal>` prints nothing and exits 1 — exactly what a
   journal not containing that attribute does. Twenty files across this
   workspace were in that state on 2026-08-18, every byte load-bearing."
-  (:require [kotoba.io :as kio] [clojure.java.io :as io]
+  (:require [kotoba.io :as kio] [kotoba.io :as io]
             [kotoba.test :refer [deftest is testing]]
             [etzhayyim.kotoba.log :as log]))
 
@@ -14,7 +14,7 @@
 
 (defn- write-one [suffix]
   (let [p (str (System/getProperty "java.io.tmpdir") "/chie-log-" suffix ".edn")]
-    (.delete (io/file p))
+    (io/delete (io/file p))
     (log/append! p [nul-datom])
     p))
 
