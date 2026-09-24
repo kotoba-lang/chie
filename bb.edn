@@ -1,3 +1,9 @@
-{:tasks
+{:deps {
+        ;; kotoba.io replaced java.nio.file.Files here (2026-09-24). An explicit
+        ;; floor: temp-dir temp-file read-all-bytes write-bytes write-string
+        ;; delete-if-exists are in kotoba.io from this sha, and tools.deps takes
+        ;; the NEWEST sha it is shown.
+        io.github.kotoba-lang/io {:git/sha "1b60ca825c1e705bd195f857ca4549133653a9f3"}}
+ :tasks
  {test {:task (shell "kbb -M -m chie.test-runner")}
   audit {:task (shell "kbb scripts/audit.cljk")}}}
