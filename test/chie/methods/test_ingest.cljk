@@ -7,7 +7,7 @@
     - G7: ingest-live REFUSES without CHIE_INGEST_LIVE + operator DID (g7-violation?)
     - DISCLOSED amount is recorded as a fact (no valuation/score attr introduced)"
   (:require [kotoba.test :refer [deftest is testing run-tests]]
-            #?(:clj [clojure.java.io :as io])
+            #?(:clj [kotoba.io :as io])
             [chie.methods.analyze :as analyze]
             [chie.methods.ingest :as ingest]))
 

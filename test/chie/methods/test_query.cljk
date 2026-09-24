@@ -7,7 +7,7 @@
     - concentration-in / opening-worklist agree with the analyze integral (one source of truth)
     - opening-worklist never surfaces an OPEN accumulator at the top (G1, not a winner-rank)"
   (:require [kotoba.test :refer [deftest is testing run-tests]]
-            #?(:clj [clojure.java.io :as io])
+            #?(:clj [kotoba.io :as io])
             [chie.methods.analyze :as analyze]
             [chie.methods.query :as q]))
 

@@ -1,9 +1,9 @@
 (require '[kotoba.lang.edn :as edn]
-         '[clojure.java.io :as io]
+         '[kotoba.io :as io]
          '[kotoba.lang.text :as str])
-(def files (filter #(.isFile %) (file-seq (io/file "."))))
+(def files (filter #(io/file? %) (io/file-seq (io/file "."))))
 (defn path [f] (str/replace-first (str f) #"^\./" ""))
-(doseq [f files :when (str/ends-with? (.getName f) ".edn")]
+(doseq [f files :when (str/ends-with? (io/file-name f) ".edn")]
   (edn/read-string (slurp f)))
 (let [forbidden (filter #(re-find #"(?i)(\.go|\.py|run_tests\.sh|publish\.bb)$" (path %)) files)
       misplaced (filter #(and (re-find #"\.(json|jsonld|bpmn|wit)$" (path %))
