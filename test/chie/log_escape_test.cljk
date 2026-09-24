@@ -7,7 +7,7 @@
   journal not containing that attribute does. Twenty files across this
   workspace were in that state on 2026-08-18, every byte load-bearing."
   (:require [kotoba.io :as kio] [clojure.java.io :as io]
-            [clojure.test :refer [deftest is testing]]
+            [kotoba.test :refer [deftest is testing]]
             [etzhayyim.kotoba.log :as log]))
 
 (def ^:private nul-datom [1 :a/b (str "x" (char 0) "y") 100 true])

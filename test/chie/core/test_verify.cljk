@@ -7,7 +7,7 @@
     - grasping-load outside [0,1] → error
     - a person node with a private-profile attr → error (G2)
     - undeclared attr vs the schema → DRIFT error"
-  (:require [kotoba.lang.text] [clojure.test :refer [deftest is testing run-tests]]
+  (:require [kotoba.lang.text] [kotoba.test :refer [deftest is testing run-tests]]
             #?(:clj [clojure.java.io :as io])
             [chie.methods.analyze :as analyze]
             [chie.methods.verify :as v]))

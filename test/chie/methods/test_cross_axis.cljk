@@ -11,7 +11,7 @@
   Verifies that breadth (axes spanned) outranks a bigger single-axis load, and the G1 invariant that
   a fully-OPEN multi-axis accumulator drops out of the chokepoint list."
   (:require [chie.methods.query :as q]
-            [clojure.test :refer [deftest is run-tests]]))
+            [kotoba.test :refer [deftest is run-tests]]))
 
 (def ^:private nodes
   {"x" {":organism/label" "X" ":ai/open?" false}    ; closed, 3 axes
