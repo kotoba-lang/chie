@@ -6,7 +6,7 @@
   `grep -c :some/attr <journal>` prints nothing and exits 1 — exactly what a
   journal not containing that attribute does. Twenty files across this
   workspace were in that state on 2026-08-18, every byte load-bearing."
-  (:require [clojure.java.io :as io]
+  (:require [kotoba.io :as kio] [clojure.java.io :as io]
             [clojure.test :refer [deftest is testing]]
             [etzhayyim.kotoba.log :as log]))
 
@@ -20,7 +20,7 @@
 
 (deftest a-journal-line-carries-no-raw-control-byte
   (let [p (write-one "escape")
-        bytes (java.nio.file.Files/readAllBytes (.toPath (io/file p)))]
+        bytes (kio/read-all-bytes (io/file p))]
     (is (not (some #(= 0 %) bytes)) "no raw NUL reaches the file")
     (is (not (some #(and (< % 32) (not (#{9 10 13} %))) bytes))
         "and no other C0 control either, except the layout three")
