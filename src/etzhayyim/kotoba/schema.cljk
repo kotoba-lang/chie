@@ -13,7 +13,7 @@
 ;; 80-data, this loader on the bb classpath.
 
 (ns etzhayyim.kotoba.schema
-  (:require [clojure.edn :as edn]
+  (:require [kotoba.lang.edn :as edn]
             [clojure.set :as set]
             [etzhayyim.kotoba.datom :as d]))
 

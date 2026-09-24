@@ -13,7 +13,7 @@
 
   CONSTITUTIONAL: read-only; no narration, no verdict; G4 forbidden attrs are unrepresentable
   in the schema so they cannot appear in any query result."
-  (:require [kotoba.lang.text] [clojure.edn :as edn]
+  (:require [kotoba.lang.text] [kotoba.lang.edn :as edn]
             #?(:clj [clojure.java.io :as io])
             #?(:clj [etzhayyim.kotoba.engine :as kt])))
 
