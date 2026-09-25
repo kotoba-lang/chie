@@ -8,7 +8,7 @@
 (ns etzhayyim.kotoba.log
   (:require [kotoba.lang.edn :as kedn]
             [kotoba.lang.edn :as edn]
-            [clojure.java.io :as io]
+            [kotoba.io :as io]
             [kotoba.lang.text :as str]
             [etzhayyim.kotoba.datom :as d]
             [etzhayyim.kotoba.cid :as cid]))
@@ -18,13 +18,13 @@
 (defn ensure-journal! [path]
   (let [f (io/file path)]
     (io/make-parents f)
-    (when-not (.exists f) (spit f ""))
+    (when-not (io/exists? f) (spit f ""))
     path))
 
 (defn read-log
   "Read the append-only journal into a vector of [e a v tx op] datoms."
   [path]
-  (if (.exists (io/file path))
+  (if (io/exists? (io/file path))
     (->> (str/split-lines (slurp path))
          (remove str/blank?)
          (mapv edn/read-string))

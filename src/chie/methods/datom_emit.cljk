@@ -14,7 +14,7 @@
   Reuses chie.methods.analyze. Node walk order = first-touch EDN read order (deterministic)."
   (:require [kotoba.lang.text :as str]
             [chie.methods.analyze :as analyze]
-            #?(:clj [clojure.java.io :as io])))
+            #?(:clj [kotoba.io :as io])))
 
 (def node-attrs
   [":organism/kind" ":organism/label" ":organism/sourcing"
@@ -105,7 +105,7 @@
      "CLI entry: analyze a seed EDN graph → out/ai-ecosystem-datoms.kotoba.edn."
      [& argv]
      (let [argv (vec argv)
-           here (-> *file* io/file .getParentFile .getParentFile .getParentFile .getParentFile)
+           here (-> *file* io/file io/parent-file io/parent-file io/parent-file io/parent-file)
            seed (if (and (seq argv) (not (str/starts-with? (first argv) "--")))
                   (io/file (first argv))
                   (io/file here "data" "seed.edn"))
@@ -118,7 +118,7 @@
            {:keys [nodes node-order edges]} (analyze/load-file* seed)
            res (analyze/analyze nodes edges)
            out (io/file outdir "ai-ecosystem-datoms.kotoba.edn")]
-       (.mkdirs outdir)
+       (io/mkdirs outdir)
        (spit out (emit nodes node-order edges res tx))
        (println (str "chie datom log → " out " (" (count nodes) " nodes + " (count edges)
                      " 縁, tx=" tx ")"))

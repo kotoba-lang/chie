@@ -17,14 +17,13 @@
 ;; The AEAD/envelope framing is independent of this choice.
 
 (ns etzhayyim.kotoba.encrypted
-  (:require [etzhayyim.kotoba.cid :as cid]
-            [etzhayyim.kotoba.crypto :as crypto])
-  #?(:clj (:import (java.util Base64))))
+  (:require [kotoba.bytes :as kbytes] [etzhayyim.kotoba.cid :as cid]
+            [etzhayyim.kotoba.crypto :as crypto]))
 
 (defn- b64 ^String [^bytes b]
-  #?(:clj (.encodeToString (Base64/getEncoder) b) :cljs nil))
+  #?(:clj (kbytes/base64-encode b) :cljs nil))
 (defn- unb64 ^bytes [^String s]
-  #?(:clj (.decode (Base64/getDecoder) s) :cljs nil))
+  #?(:clj (kbytes/base64-decode-bytes s) :cljs nil))
 
 (defn- sha256 ^bytes [^bytes b] (cid/sha2-256-digest b))
 (defn- hexpref [^bytes b ^long nchars]
@@ -33,9 +32,9 @@
 (def ^:dynamic *encode-plaintext*
   "Plaintext -> bytes. Default = UTF-8 of canonical EDN. Bind to a CBOR encoder
    to match the production wire (the AEAD framing is unaffected)."
-  (fn [v] #?(:clj (.getBytes (pr-str v) "UTF-8") :cljs nil)))
+  (fn [v] #?(:clj (kbytes/utf8-bytes (pr-str v)) :cljs nil)))
 (def ^:dynamic *decode-plaintext*
-  (fn [^bytes b] #?(:clj (read-string (String. b "UTF-8")) :cljs nil)))
+  (fn [^bytes b] #?(:clj (read-string (kbytes/utf8-string b)) :cljs nil)))
 
 (defn key-id
   "keyId = hex prefix of sha256(sym-key) (16 hex chars), per ADR-2605181100."
@@ -48,7 +47,7 @@
    within the same MST. (Production kotoba-crypto binds the MST self-cid; this
    deterministic ref keeps the reference vectors reproducible.)"
   [{:keys [innerType sender createdAt keyId]}]
-  #?(:clj (.getBytes (cid/cid-of-edn [innerType sender createdAt keyId]) "UTF-8")
+  #?(:clj (kbytes/utf8-bytes (cid/cid-of-edn [innerType sender createdAt keyId]))
      :cljs nil))
 
 (defn seal

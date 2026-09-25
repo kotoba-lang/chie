@@ -24,7 +24,7 @@
   strings; pure fns; deterministic ordering by (-value, id); file I/O only at edges. Portable
   .cljc (clj-native — no Python twin; kotoba pywasm target is the Clojure source itself)."
   (:require [kotoba.lang.text :as str]
-            #?(:clj [clojure.java.io :as io])))
+            #?(:clj [kotoba.io :as io])))
 
 ;; ── minimal EDN reader (subset: vectors [], maps {}, :keyword, "string", num, bool, nil) ──
 ;; Keywords are kept as ":ns/name" strings so the whole pipeline stays string-keyed.
@@ -271,7 +271,7 @@
      "CLI entry: analyze a seed EDN graph → out/opening-report.md."
      [& argv]
      (let [argv (vec argv)
-           here (-> *file* io/file .getParentFile .getParentFile .getParentFile .getParentFile)
+           here (-> *file* io/file io/parent-file io/parent-file io/parent-file io/parent-file)
            seed (if (and (seq argv) (not (str/starts-with? (first argv) "--")))
                   (io/file (first argv))
                   (io/file here "data" "seed.edn"))
@@ -280,7 +280,7 @@
                     (io/file here "out"))
            {:keys [nodes edges]} (load-file* seed)
            res (analyze nodes edges)]
-       (.mkdirs outdir)
+       (io/mkdirs outdir)
        (spit (io/file outdir "opening-report.md") (report-md nodes edges res))
        (println (str "chie: " (count nodes) " nodes, " (count edges) " 縁 → "
                      (io/file outdir "opening-report.md")))

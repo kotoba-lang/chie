@@ -13,14 +13,14 @@
   Wikidata) remain G7-gated. The returned summary is aggregate-only (G5): counts,
   CIDs, and the single top opening-priority headline, never a per-entity score."
   (:require [chie.methods.autorun :as autorun]
-            #?(:clj [clojure.java.io :as io])))
+            #?(:clj [kotoba.io :as io])))
 
 #?(:clj
    (defn- actor-dir
      "., resolved from this namespace's classpath location so the cell
      runs from any cwd (the cell-runner's contract)."
      []
-     (-> (io/resource "chie/cell.cljc") io/file .getParentFile .getParentFile .getParentFile)))
+     (-> (io/resource "chie/cell.cljc") io/file io/parent-file io/parent-file io/parent-file)))
 
 #?(:clj
    (def log-default

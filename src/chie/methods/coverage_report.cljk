@@ -14,7 +14,7 @@
   Pure fns; reuses chie.methods.analyze. Portable .cljc."
   (:require [kotoba.lang.text :as str]
             [chie.methods.analyze :as analyze]
-            #?(:clj [clojure.java.io :as io])))
+            #?(:clj [kotoba.io :as io])))
 
 (def expected-kinds
   [":ai.org/lab" ":ai.org/company" ":ai.org/research" ":ai.org/standards"
@@ -100,7 +100,7 @@
    (defn -main
      [& argv]
      (let [argv (vec argv)
-           here (-> *file* io/file .getParentFile .getParentFile .getParentFile .getParentFile)
+           here (-> *file* io/file io/parent-file io/parent-file io/parent-file io/parent-file)
            seed (if (and (seq argv) (not (str/starts-with? (first argv) "--")))
                   (io/file (first argv))
                   (io/file here "data" "seed.edn"))
@@ -109,7 +109,7 @@
                     (io/file here "out"))
            {:keys [nodes edges]} (analyze/load-file* seed)
            c (coverage nodes edges)]
-       (.mkdirs outdir)
+       (io/mkdirs outdir)
        (spit (io/file outdir "coverage-report.md") (report-md c))
        (println (str "chie coverage → " (:n-nodes c) " nodes, " (:n-edges c) " 縁, "
                      (count (:missing-kinds c)) " gap kind(s)"))

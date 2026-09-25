@@ -17,7 +17,7 @@
   Pure fns; file I/O only at the #?(:clj) edge; deterministic."
   (:require [kotoba.lang.text :as str]
             [chie.methods.analyze :as analyze]
-            #?(:clj [clojure.java.io :as io])))
+            #?(:clj [kotoba.io :as io])))
 
 (def live-env "CHIE_INGEST_LIVE")
 
@@ -177,7 +177,7 @@
    (defn -main
      "CLI: offline-ingest the disclosed fixture into the seed and report the upgrade."
      [& _]
-     (let [here (-> *file* io/file .getParentFile .getParentFile .getParentFile .getParentFile)
+     (let [here (-> *file* io/file io/parent-file io/parent-file io/parent-file io/parent-file)
            seed (io/file here "data" "seed.edn")
            fixtures [(io/file here "data" "ingest" "disclosed-rounds.fixture.edn")
                      (io/file here "data" "ingest" "disclosed-policy.fixture.edn")]
