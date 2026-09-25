@@ -1,5 +1,5 @@
 (ns chie.test-runner
-  (:require [clojure.java.io :as io]
+  (:require [kotoba.io :as io]
             [kotoba.test :as test]))
 
 (defn- file-ns [file]
@@ -7,10 +7,10 @@
     (second (read {:read-cond :allow :features #{:clj}} r))))
 
 (defn -main [& _]
-  (let [files (->> (file-seq (io/file "test/chie"))
-                   (filter #(.isFile %))
-                   (filter #(re-find #"\.clj(c)?$" (.getName %)))
-                   (remove #(= "test_runner.clj" (.getName %)))
+  (let [files (->> (io/file-seq (io/file "test/chie"))
+                   (filter #(io/file? %))
+                   (filter #(re-find #"\.clj(c)?$" (io/file-name %)))
+                   (remove #(= "test_runner.clj" (io/file-name %)))
                    (sort-by str))
         namespaces (mapv file-ns files)]
     (doseq [file files] (load-file (str file)))

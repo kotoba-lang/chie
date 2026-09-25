@@ -14,7 +14,7 @@
   CONSTITUTIONAL: read-only; no narration, no verdict; G4 forbidden attrs are unrepresentable
   in the schema so they cannot appear in any query result."
   (:require [kotoba.lang.text] [kotoba.lang.edn :as edn]
-            #?(:clj [clojure.java.io :as io])
+            #?(:clj [kotoba.io :as io])
             #?(:clj [etzhayyim.kotoba.engine :as kt])))
 
 (defn seed-rows
@@ -63,7 +63,7 @@
 #?(:clj
    (defn -main
      [& _]
-     (let [here (-> *file* io/file .getParentFile .getParentFile .getParentFile .getParentFile)
+     (let [here (-> *file* io/file io/parent-file io/parent-file io/parent-file io/parent-file)
            seed (io/file here "data" "seed.edn")
            journal (io/file (System/getProperty "java.io.tmpdir")
                             (str "chie-kqe-" (System/nanoTime) ".journal.edn"))

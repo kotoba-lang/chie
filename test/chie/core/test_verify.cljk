@@ -8,7 +8,7 @@
     - a person node with a private-profile attr → error (G2)
     - undeclared attr vs the schema → DRIFT error"
   (:require [kotoba.lang.text] [kotoba.test :refer [deftest is testing run-tests]]
-            #?(:clj [clojure.java.io :as io])
+            #?(:clj [kotoba.io :as io])
             [chie.methods.analyze :as analyze]
             [chie.methods.verify :as v]))
 
@@ -16,8 +16,8 @@
 #?(:clj (def seed (io/file actor-dir "data" "seed.edn")))
 #?(:clj (defn- repo-root []
           (loop [d actor-dir] (cond (nil? d) actor-dir
-                                    (.exists (io/file d "00-contracts" "schemas")) d
-                                    :else (recur (.getParentFile d))))))
+                                    (io/exists? (io/file d "00-contracts" "schemas")) d
+                                    :else (recur (io/parent-file d))))))
 #?(:clj (def schema (io/file actor-dir "data" "schema" "ai-ecosystem.edn")))
 #?(:clj (defn- graph [] (analyze/load-file* seed)))
 

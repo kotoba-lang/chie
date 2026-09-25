@@ -19,7 +19,7 @@
   (:require [kotoba.lang.text :as str]
             [kotoba.lang.coll :as set]
             [chie.methods.analyze :as analyze]
-            #?(:clj [clojure.java.io :as io])))
+            #?(:clj [kotoba.io :as io])))
 
 (def node-kinds
   #{":ai.org/lab" ":ai.org/company" ":ai.org/research" ":ai.org/standards" ":ai.org/funder"
@@ -110,12 +110,12 @@
 #?(:clj
    (defn -main
      [& _]
-     (let [here (-> *file* io/file .getParentFile .getParentFile .getParentFile .getParentFile)
+     (let [here (-> *file* io/file io/parent-file io/parent-file io/parent-file io/parent-file)
            seed (io/file here "data" "seed.edn")
            ;; walk up to the worktree root holding 00-contracts/
            root (loop [d here] (cond (nil? d) here
-                                     (.exists (io/file d "00-contracts" "schemas")) d
-                                     :else (recur (.getParentFile d))))
+                                     (io/exists? (io/file d "00-contracts" "schemas")) d
+                                     :else (recur (io/parent-file d))))
            schema (io/file root "00-contracts" "schemas" "ai-ecosystem-ontology.kotoba.edn")
            r (verify-files seed schema)]
        (println (str "chie verify: " (:stats r) " · errors " (count (:errors r))
