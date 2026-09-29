@@ -52,7 +52,7 @@ kenkyusha research frontiers, and `*-compat` API facades).
 
 ```
 ./
-├── CLAUDE.md                              # this file
+├── AGENTS.md                              # this file
 ├── wire/manifest.jsonld                        # actor manifest
 ├── MATURITY.md                            # maturity scorecard + roadmap
 ├── kotoba/
