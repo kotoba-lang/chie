@@ -61,13 +61,13 @@ kbb -M:kotoba:roster-report | grep chie  # chie on the roster — 0 undeclared /
 | `data/ingest/*.fixture.edn` | DISCLOSED-source fixtures (rounds + policy, official URLs) |
 | `src/chie/methods/*.cljc` | analyze · datom_emit · coverage_report · autorun · digest · ingest · query · verify |
 | `cell.cljc` | cell-runner entry (`ChieHeartbeatCell`, node gad, cron `37 * * * *`) |
-| `CLAUDE.md` / `MATURITY.md` | gates + scorecard |
+| `AGENTS.md` / `MATURITY.md` | gates + scorecard |
 
 ## Gates
 
 G1 OPENING-map-not-winner-rank · G2 edge-primary + public-role-only · G3 non-adjudicating ·
 G4 never-trades / never-forecasts (unrepresentable) · G5 sourcing-honesty · G6 Murakumo-only ·
-G7 live-ingest Council+operator-gated. See `CLAUDE.md` for the full text.
+G7 live-ingest Council+operator-gated. See `AGENTS.md` for the full text.
 
 ## Cross-links
 
